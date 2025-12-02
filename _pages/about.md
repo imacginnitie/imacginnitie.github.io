@@ -2,16 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle:
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+  more_info: 
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -27,8 +24,11 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+My interests lie in doing thoughtful AI alignment research, both {% glossary technical %} and {% glossary normative %}. I'm currently a research fellow at [Athena](https://researchathena.org/) and [SPAR](https://sparai.org/). I am also applying to CS PhDs for Fall 2026, for which I was awarded the [NSF CSGrad4US](https://www.nsf.gov/cise/graduate-fellowships) fellowship, fully funding 3 years of my studies. 
+ 
+My work is guided by these overarching questions: 
+ - How can we use our theories and techniques from social sciences to do better alignment research? 
+ - On the technical side, how can we use our understanding of emergent model behavior and [“LLM psychology”](https://www.lesswrong.com/posts/zuXo9imNKYspu9HGv/a-three-layer-model-of-llm-psychology) to improve our training and monitoring and build more capable models that behave predictably? 
+ - On the normative side, how can we use moral philosophy and applied ethics to improve value conflict resolution and moral reasoning and design robust AI systems able to navigate value conflict in novel domains? 
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
-
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+Previously, I was make getting more people into homes by accelerating mortgage assumptions as first engineering hire at [RetroRate](https://www.retrorate.com/), and improving access to early cancer detection as a software engineer at [Color](https://www.color.com/). I graduated from Harvey Mudd College in 2023 with a BS with high distinction in computer science and math.

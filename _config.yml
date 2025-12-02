@@ -213,6 +213,7 @@ plugins:
   - jekyll-toc
   - jekyll-twitter-plugin
   - jemoji
+  - jekyll-glossary_tooltip
 
 # Sitemap settings
 defaults:
@@ -640,3 +641,22 @@ jsonresume:
   - languages
   - interests
   - references
+
+
+profile_photos:
+  - banh_mi.jpeg
+  - costco.jpeg
+  - donna_jean.jpg
+  - graduation-72.jpg
+  - hawaii.JPG
+  - la_jolla.jpg
+  - little_saigon.JPG
+  - osaka.jpeg
+  - passport.JPG
+  - pikmin.jpg
+  - rr.jpeg
+  - sandy_neck.jpeg
+  - sd.jpg
+  - sf.jpeg
+  - tokyo.jpeg
+  - western_states.jpg

@@ -1,0 +1,4 @@
+- term: technical           # Can contain spaces
+  definition: building AI models that do what we tell them
+- term: normative
+  definition: building models that do what is morally right (and often implicitly, choosing what we think is morally right)

@@ -18,19 +18,26 @@ layout: default
     {% if page.profile %}
       <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
         {% if page.profile.image %}
-          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
           {% if page.profile.image_circular %}
             {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
           {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1
-      rounded' %}
+            {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
           {% endif %}
-          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
-      30vw, 95vw"{% endcapture %}
-          {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
-            cache_bust=true
-          %}
+          
+          <div style="position: relative;">
+            {% for photo in site.profile_photos %}
+              <img src="/assets/img/pfp/{{ photo }}" class="{{ profile_image_class }} profile-photo" style="display: none; position: absolute; top: 0; left: 0;" alt="Profile photo" />
+            {% endfor %}
+          </div>
+          
+          <script>
+            const photos = document.querySelectorAll('.profile-photo');
+            if (photos.length > 0) {
+              const randomIndex = Math.floor(Math.random() * photos.length);
+              photos[randomIndex].style.display = 'block';
+              photos[randomIndex].style.position = 'relative';
+            }
+          </script>
         {% endif %}
         {% if page.profile.more_info %}
           <div class="more-info">{{ page.profile.more_info }}</div>
