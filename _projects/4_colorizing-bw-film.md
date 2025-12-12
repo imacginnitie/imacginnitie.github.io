@@ -20,7 +20,7 @@ permalink: projects/colorizing-bw-film/
         {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/2_pg.jpg" title="PG method" caption="PG method" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm-3 mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/film_img_8.png" title="colorized" caption="colorized" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/film_img_8.png" title="CNN colorized" caption="CNN colorized" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 This project compared modern machine learning colorization with a 1900s Russian technique for colorizing analog photographs. I trained a convolutional neural network colorizer, customizing it for my use-case by experimenting with the relationship between training data composition and colorization results for the nine custom-made and 100 historical images chosen for testing.
@@ -91,7 +91,7 @@ Andy
         {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/andy_aligned.jpg" title="Prokudin-Gorskii method" caption="Prokudin-Gorskii method" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm-5 mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/film_img_3.png" title="colorized" caption="colorized" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/film_img_3.png" title="CNN colorized" caption="CNN colorized" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 Eugene
@@ -109,6 +109,6 @@ Eugene
         {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/eugene_aligned.jpg" title="Prokudin-Gorskii method" caption="Prokudin-Gorskii method" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm-5 mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/film_img_1.png" title="colorized" caption="colorized" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/film_img_1.png" title="CNN colorized" caption="CNN colorized" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
