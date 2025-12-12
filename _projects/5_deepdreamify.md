@@ -28,7 +28,7 @@ Try it yourself here: [Link to Colab Notebook](https://colab.research.google.com
 
 <div class="row justify-content-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid loading="lazy" path="assets/img/projects/deepdreamify/video_gifs_256.gif" title="recorded webcam feed, deepdreamify-ed!" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/projects/deepdreamify/video_gifs_256.gif" title="recorded webcam feed, deepdreamify-ed!" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -37,7 +37,7 @@ Try it yourself here: [Link to Colab Notebook](https://colab.research.google.com
 
 <div class="row justify-content-center">
     <div class="col-sm-10 mt-3 mt-md-0">
-        {% include figure.liquid loading="lazy" path="assets/img/projects/deepdreamify/combined_gifs.gif" title="daily picture" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/projects/deepdreamify/combined_gifs.gif" title="daily picture" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
