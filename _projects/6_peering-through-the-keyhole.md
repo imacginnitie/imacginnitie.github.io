@@ -8,9 +8,11 @@ category: photography
 permalink: /photography/peering-through-the-keyhole/
 ---
 
+[Full artist defence](../../assets/pdf/artist_defense.pdf)
+
 This is a series of 10 paired self-portraits documenting a constructed version of myself in different scenes of my life. With the captions, I aimed to make connections to aspects of my identity such as being a CS major, a Filipina-American, and a woman, especially in consideration and perhaps refutation of stereotypes associated with those groups.
 
-The series' title references the popular quotation from Margaret Atwood's The Robber Bride:
+The series' title references Margaret Atwood's *The Robber Bride*:
 
 > "Even pretending you aren't catering to male fantasies is a male fantasy: pretending you're unseen, pretending you have a life of your own, that you can wash your feet and comb your hair unconscious of the ever-present watcher peering through the keyhole, peering through the keyhole in your own head, if nowhere else. You are a woman with a man inside watching a woman. You are your own voyeur."
 

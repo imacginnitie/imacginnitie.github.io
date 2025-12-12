@@ -10,7 +10,7 @@ permalink: projects/colorizing-bw-film/
 
 #### Comparing the Prokudin-Gorskii Method and Neural Networks
 
-[Link to full written report](../../assets/pdf/MacGinnitie_Final_Project_Report.pdf)
+[Full written report](../../assets/pdf/MacGinnitie_Final_Project_Report.pdf)
 <div class="row align-items-center justify-content-center">
     <div class="col-sm-4 mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/projects/colorizing/2bw.jpg" title="black and white film" caption="black and white film" class="img-fluid rounded z-depth-1" %}
