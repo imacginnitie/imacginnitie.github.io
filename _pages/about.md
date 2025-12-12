@@ -25,12 +25,12 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-My interests lie in doing thoughtful AI alignment research, both {% glossary technical %} and {% glossary normative %}. I'm currently a research fellow at [Athena](https://researchathena.org/) and [SPAR](https://sparai.org/). I am also applying to CS PhDs for Fall 2026, for which I was awarded the [NSF CSGrad4US](https://www.nsf.gov/cise/graduate-fellowships) fellowship, fully funding 3 years of my studies.
+My interests lie in doing thoughtful AI alignment research, both {% glossary technical %} and {% glossary normative %}. I'm currently a research fellow at [Athena](https://researchathena.org/) and [SPAR](https://sparai.org/). I am also applying to CS PhD programs for Fall 2026, supported by the [NSF CSGrad4US](https://www.nsf.gov/cise/graduate-fellowships) fellowship.
 
 My work is guided by these overarching questions:
 
 - How can we use our theories and techniques from social sciences to do better alignment research?
-- On the technical side, how can we use our understanding of emergent model behavior and [“LLM psychology”](https://www.lesswrong.com/posts/zuXo9imNKYspu9HGv/a-three-layer-model-of-llm-psychology) to improve our training and monitoring and build more capable models that behave predictably?
-- On the normative side, how can we use moral philosophy and applied ethics to improve value conflict resolution and moral reasoning and design robust AI systems able to navigate value conflict in novel domains?
+- On the technical side, how can we use our understanding of emergent model behavior to improve our training and monitoring, so we can build more capable and robust models?
+- On the normative side, how can we use moral philosophy and applied ethics to improve value conflict resolution and moral reasoning, so we can design robust AI systems able to navigate ethical ambiguity and complex value conflicts in novel domains?
 
-Previously, I was make getting more people into homes by accelerating mortgage assumptions as first engineering hire at [RetroRate](https://www.retrorate.com/), and improving access to early cancer detection as a software engineer at [Color](https://www.color.com/). I graduated from Harvey Mudd College in 2023 with a BS with high distinction in computer science and math.
+Previously, I was make getting more people into homes by accelerating mortgage assumptions as first engineering hire at [RetroRate](https://www.retrorate.com/), and improving access to early cancer detection as a software engineer at [Color](https://www.color.com/). I graduated Harvey Mudd College in 2023 with a BS in computer science and math with high distinction.
