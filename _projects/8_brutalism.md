@@ -43,4 +43,3 @@ permalink: /photography/brutalism-gender-at-mudd/
         {% include figure.liquid loading="eager" path="assets/img/photography/brutalism/midterm-print-8.jpg" title="brutalism" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
-

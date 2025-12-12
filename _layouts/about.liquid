@@ -26,10 +26,15 @@ layout: default
           {% if page.profile.random %}
             <div style="position: relative;">
               {% for photo in site.profile_photos %}
-                <img src="/assets/img/pfp/{{ photo }}" class="{{ profile_image_class }} profile-photo" style="display: none; position: absolute; top: 0; left: 0;" alt="Profile photo" />
+                <img
+                  src="/assets/img/pfp/{{ photo }}"
+                  class="{{ profile_image_class }} profile-photo"
+                  style="display: none; position: absolute; top: 0; left: 0;"
+                  alt="Profile photo"
+                >
               {% endfor %}
             </div>
-            
+
             <script>
               const photos = document.querySelectorAll('.profile-photo');
               if (photos.length > 0) {

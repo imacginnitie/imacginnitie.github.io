@@ -25,4 +25,3 @@ permalink: /photography/fallingwater/
         {% include figure.liquid loading="eager" path="assets/img/photography/fallingwater/fallingwater-9.jpg" title="fallingwater" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
-

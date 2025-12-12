@@ -1523,7 +1523,6 @@ mjx-container[jax="CHTML"][display="true"] {
   bottom: 100%;
   left: 50%;
   margin-left: -80px; /* Use half of the width to center the tooltip */
-
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -1533,7 +1532,7 @@ mjx-container[jax="CHTML"][display="true"] {
 
 /* Style the source link (if there is one provided in the glossary entry). */
 .jekyll-glossary-source-link:before {
-  content: "[source]";  // "(reference)", "<link>" or whatever you want.
+  content: "[source]"; // "(reference)", "<link>" or whatever you want.
 }
 
 /* Arrow created with borders. */
@@ -1562,6 +1561,6 @@ mjx-container[jax="CHTML"][display="true"] {
  * parenthesis that are added are hidden in the normal blog post with hoover, but
  * hidden in the post.except when html and css is stripped. Ref:
  * https://github.com/erikw/jekyll-glossary_tooltip/issues/7#issuecomment-2711471867 */
- .jekyll-glossary-tooltip-hidden {
-    display: none;
-  }
+.jekyll-glossary-tooltip-hidden {
+  display: none;
+}

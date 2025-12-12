@@ -7,6 +7,7 @@ importance: 5
 category: fun
 permalink: projects/deepdreamify/
 ---
+
 <div class="row">
     <div class="col-sm-3 mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/projects/deepdreamify/22.png" class="img-fluid rounded z-depth-1" %}
@@ -42,4 +43,3 @@ Try it yourself here: [Link to Colab Notebook](https://colab.research.google.com
 <div class="caption">
     A daily picture of me vs the abstract art version
 </div>
-
