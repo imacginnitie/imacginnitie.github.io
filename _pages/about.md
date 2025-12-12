@@ -6,8 +6,9 @@ subtitle:
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: pfp/la_jolla.jpg
   image_circular: false # crops the image to make it circular
+  random: false
   more_info: 
 
 selected_papers: false # includes a list of papers marked as "selected={true}"

@@ -23,21 +23,24 @@ layout: default
           {% else %}
             {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
           {% endif %}
-          
-          <div style="position: relative;">
-            {% for photo in site.profile_photos %}
-              <img src="/assets/img/pfp/{{ photo }}" class="{{ profile_image_class }} profile-photo" style="display: none; position: absolute; top: 0; left: 0;" alt="Profile photo" />
-            {% endfor %}
-          </div>
-          
-          <script>
-            const photos = document.querySelectorAll('.profile-photo');
-            if (photos.length > 0) {
-              const randomIndex = Math.floor(Math.random() * photos.length);
-              photos[randomIndex].style.display = 'block';
-              photos[randomIndex].style.position = 'relative';
-            }
-          </script>
+          {% if page.profile.random %}
+            <div style="position: relative;">
+              {% for photo in site.profile_photos %}
+                <img src="/assets/img/pfp/{{ photo }}" class="{{ profile_image_class }} profile-photo" style="display: none; position: absolute; top: 0; left: 0;" alt="Profile photo" />
+              {% endfor %}
+            </div>
+            
+            <script>
+              const photos = document.querySelectorAll('.profile-photo');
+              if (photos.length > 0) {
+                const randomIndex = Math.floor(Math.random() * photos.length);
+                photos[randomIndex].style.display = 'block';
+                photos[randomIndex].style.position = 'relative';
+              }
+            </script>
+          {% else %}
+            <img src="{{ page.profile.image | prepend: '/assets/img/' | relative_url }}" alt="Profile photo" class="{{ profile_image_class }}">
+          {% endif %}
         {% endif %}
         {% if page.profile.more_info %}
           <div class="more-info">{{ page.profile.more_info }}</div>

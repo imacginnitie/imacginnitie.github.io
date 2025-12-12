@@ -2,9 +2,9 @@
 layout: page
 title: photography
 permalink: /photography/
-description: A collection of photography projects.
+description:
 nav: true
-nav_order: 4
+nav_order: 3
 display_categories: [photography]
 horizontal: false
 ---
