@@ -6,6 +6,7 @@ img:
 importance: 2
 category: research
 permalink: projects/spar/
+published: false
 ---
 
 Coming soon!

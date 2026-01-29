@@ -1,10 +1,10 @@
 ---
 layout: page
 title: colorizing b&w film
-description: Computational Photography II 2022
+description: Computational Photography II 2021
 img: assets/img/projects/colorizing/aligned.jpg
 importance: 4
-category: fun
+category: research
 permalink: projects/colorizing-bw-film/
 ---
 
