@@ -33,16 +33,14 @@ ninja.data = [{
         },{id: "news-i-was-awarded-the-nsf-csgrad4us-fellowship-funding-3-years-of-a-phd",
           title: 'I was awarded the NSF CSGrad4US fellowship, funding 3 years of a PhD!...',
           description: "",
+          section: "News",},{id: "news-i-attended-the-athena-research-retreat-in-hostačov-czechia-for-a-week-of-amazing-talks-workshops-and-events-on-ai-alignment",
+          title: 'I attended the Athena research retreat in Hostačov, Czechia, for a week of...',
+          description: "",
           section: "News",},{id: "projects-model-organism-for-encoded-chain-of-thought",
           title: 'model organism for encoded chain of thought',
           description: "Athena AI Alignment Mentorship Program 2025",
           section: "Projects",handler: () => {
               window.location.href = "/projects/athena/";
-            },},{id: "projects-eval-for-stated-vs-revealed-preferences-using-animal-ethics",
-          title: 'eval for stated vs revealed preferences using animal ethics',
-          description: "Supervised Program for Alignment Research (SPAR) 2025",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/spar/";
             },},{id: "projects-building-an-intuitive-image-complexity-metric",
           title: 'building an intuitive image complexity metric',
           description: "Harvey Mudd College REU 2022",
@@ -50,7 +48,7 @@ ninja.data = [{
               window.location.href = "/projects/image-complexity/";
             },},{id: "projects-colorizing-b-amp-w-film",
           title: 'colorizing b&amp;amp;w film',
-          description: "Computational Photography II 2022",
+          description: "Computational Photography II 2021",
           section: "Projects",handler: () => {
               window.location.href = "/projects/colorizing-bw-film/";
             },},{id: "projects-deepdreamify",
@@ -73,6 +71,11 @@ ninja.data = [{
           description: "Claremont, CA, 2022 // Fujifilm X-T4",
           section: "Projects",handler: () => {
               window.location.href = "/photography/brutalism-gender-at-mudd/";
+            },},{id: "projects-goodreads-wrapped",
+          title: 'goodreads wrapped',
+          description: "2024 &amp; 2025",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/goodreads-wrapped/";
             },},{
         id: 'social-cv',
         title: 'CV',
