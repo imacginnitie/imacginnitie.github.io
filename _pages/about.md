@@ -8,7 +8,7 @@ profile:
   align: right
   image: pfp/la_jolla.jpg
   image_circular: false # crops the image to make it circular
-  random: false
+  random: true
   more_info:
 
 selected_papers: false # includes a list of papers marked as "selected={true}"

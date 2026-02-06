@@ -642,20 +642,50 @@ jsonresume:
   - interests
   - references
 
+# Rarity weights: common = 10, rare = 3, secret = 1
 profile_photos:
-  - banh_mi.jpeg
-  - costco.jpeg
-  - donna_jean.jpg
-  - graduation-72.jpg
-  - hawaii.JPG
-  - la_jolla.jpg
-  - little_saigon.JPG
-  - osaka.jpeg
-  - passport.JPG
-  - pikmin.jpg
-  - rr.jpeg
-  - sandy_neck.jpeg
-  - sd.jpg
-  - sf.jpeg
-  - tokyo.jpeg
-  - western_states.jpg
+  - file: banh_mi.jpeg
+    rarity: rare
+    caption: "Little Saigon, 2025"
+  - file: donna_jean.jpg
+    rarity: common
+    caption: "San Diego, 2025"
+  - file: graduation-72.jpg
+    rarity: common
+    caption: "Claremont, 2023"
+  - file: hawaii.JPG
+    rarity: secret
+    caption: "Hawaii, 2005"
+  - file: la_jolla.jpg
+    rarity: common
+    caption: "La Jolla, 2025"
+  - file: little_saigon.JPG
+    rarity: common
+    caption: "Little Saigon, 2025"
+  - file: osaka.jpeg
+    rarity: common
+    caption: "Osaka, 2023"
+  - file: passport.JPG
+    rarity: rare
+    caption: "USA, 2021"
+  - file: pikmin.jpg
+    rarity: secret
+    caption: "Cambridge, 2025"
+  - file: rr.jpeg
+    rarity: rare
+    caption: "San Diego, 2025"
+  - file: sandy_neck.jpeg
+    rarity: common
+    caption: "Sandy Neck, 2024"
+  - file: sf.jpeg
+    rarity: rare
+    caption: "SFMOMA, 2022"
+  - file: tokyo.jpeg
+    rarity: rare
+    caption: "Tokyo, 2024"
+  - file: western_states.jpg
+    rarity: secret
+    caption: "Western States 100 mile ultra, 2006 (I was not running)"
+  - file: iceland.jpeg
+    rarity: secret
+    caption: "Iceland, 2023 (with Andy!)"

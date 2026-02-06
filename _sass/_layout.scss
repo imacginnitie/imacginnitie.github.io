@@ -36,6 +36,14 @@ body.sticky-bottom-footer {
   img {
     width: 100%;
   }
+
+  .profile-photo-caption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--global-text-color-light);
+    text-align: center;
+  }
 }
 
 // TODO: redefine content layout.

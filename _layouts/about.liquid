@@ -24,24 +24,61 @@ layout: default
             {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
           {% endif %}
           {% if page.profile.random %}
-            <div style="position: relative;">
+            <div class="profile-photo-container" style="position: relative;">
               {% for photo in site.profile_photos %}
-                <img
-                  src="/assets/img/pfp/{{ photo }}"
-                  class="{{ profile_image_class }} profile-photo"
-                  style="display: none; position: absolute; top: 0; left: 0;"
-                  alt="Profile photo"
-                >
+                <figure class="profile-photo-figure" style="display: none; margin: 0;" data-rarity="{{ photo.rarity | default: 'common' }}">
+                  <img
+                    src="/assets/img/pfp/{{ photo.file }}"
+                    class="{{ profile_image_class }}"
+                    alt="Profile photo"
+                  >
+                  {% if photo.caption and photo.caption != "" %}
+                    <figcaption class="profile-photo-caption">{{ photo.caption }}</figcaption>
+                  {% endif %}
+                </figure>
               {% endfor %}
             </div>
 
             <script>
-              const photos = document.querySelectorAll('.profile-photo');
-              if (photos.length > 0) {
-                const randomIndex = Math.floor(Math.random() * photos.length);
-                photos[randomIndex].style.display = 'block';
-                photos[randomIndex].style.position = 'relative';
-              }
+              (function() {
+                // 60% common, 30% rare, 10% secret
+                const tierWeights = { common: 60, rare: 30, secret: 10 };
+                const figures = document.querySelectorAll('.profile-photo-figure');
+                const container = document.querySelector('.profile-photo-container');
+                if (figures.length > 0) {
+                  // Group photos by tier
+                  const tiers = { common: [], rare: [], secret: [] };
+                  figures.forEach((fig, idx) => {
+                    const rarity = fig.dataset.rarity || 'common';
+                    if (tiers[rarity]) tiers[rarity].push(idx);
+                  });
+
+                  function pickPhoto() {
+                    // Hide all
+                    figures.forEach(fig => fig.style.display = 'none');
+                    // Pick a tier (weighted), falling back if tier is empty
+                    const roll = Math.random() * 100;
+                    let selectedTier;
+                    if (roll < tierWeights.secret && tiers.secret.length > 0) {
+                      selectedTier = 'secret';
+                    } else if (roll < tierWeights.secret + tierWeights.rare && tiers.rare.length > 0) {
+                      selectedTier = 'rare';
+                    } else {
+                      selectedTier = 'common';
+                    }
+                    // Pick random photo within the tier
+                    const pool = tiers[selectedTier];
+                    const selectedIdx = pool[Math.floor(Math.random() * pool.length)];
+                    figures[selectedIdx].style.display = 'block';
+                  }
+
+                  // Initial pick
+                  pickPhoto();
+                  // Click to reroll
+                  container.style.cursor = 'pointer';
+                  container.addEventListener('click', pickPhoto);
+                }
+              })();
             </script>
           {% else %}
             <img src="{{ page.profile.image | prepend: '/assets/img/' | relative_url }}" alt="Profile photo" class="{{ profile_image_class }}">
