@@ -655,7 +655,7 @@ profile_photos:
     caption: "Claremont, 2023"
   - file: hawaii.JPG
     rarity: secret
-    caption: "Hawaii, 2005"
+    caption: "Hawaii, 2006"
   - file: la_jolla.jpg
     rarity: common
     caption: "La Jolla, 2025"
@@ -685,7 +685,7 @@ profile_photos:
     caption: "Tokyo, 2024"
   - file: western_states.jpg
     rarity: secret
-    caption: "Western States 100 mile ultra, 2006 (I was not running)"
+    caption: "Western States 100 mile ultra, 2007 (I was not running)"
   - file: iceland.jpeg
     rarity: secret
     caption: "Iceland, 2023 (with Andy!)"
