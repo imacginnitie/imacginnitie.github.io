@@ -25,12 +25,6 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-My interests lie in doing thoughtful AI alignment research, both {% glossary technical %} and {% glossary normative %}. I'm currently a research fellow at [Athena](https://researchathena.org/) working on examples of encoded chain-of-thought. I am also applying to CS PhD programs for Fall 2026, supported by the [NSF CSGrad4US](https://www.nsf.gov/cise/graduate-fellowships) fellowship.
+I am an incoming PhD student in Computer Science & Engineering at the University of Washington, advised by [Max Kleiman-Weiner](https://faculty.washington.edu/maxkw/) and supported by the [NSF CSGrad4US](https://www.nsf.gov/cise/graduate-fellowships) fellowship. I am interested in {% glossary technical %} and {% glossary normative %} AI alignment with a focus on research that promotes humanity's ability to learn, advance, and flourish in a world with transformative AI.
 
-My work is guided by these overarching questions:
-
-- How can we use our theories and techniques from social sciences to do better alignment research?
-- On the technical side, how can we use our understanding of emergent model behavior to improve our training and monitoring, so we can build more capable and robust models?
-- On the normative side, how can we use moral philosophy and applied ethics to improve value conflict resolution and moral reasoning, so we can design robust AI systems able to navigate ethical ambiguity and complex value conflicts in novel domains?
-
-Previously, I was helping get more people into homes by accelerating mortgage assumptions as first engineering hire at [RetroRate](https://www.retrorate.com/), and improving access to early cancer detection as a software engineer at [Color](https://www.color.com/). I graduated Harvey Mudd College in 2023 with a BS in computer science and math with high distinction.
+Previously, I was a research fellow at [Athena](https://researchathena.org/), an incredible program for women interested in AI alignment, where I investigated using emojis and filler tokens to obscure chain-of-thought. Before transitioning to research, I was the first hire at [RetroRate](https://www.retrorate.com/) and a software engineer at [Color](https://www.color.com/). I graduated from Harvey Mudd College in 2023 with a BS in computer science and math.
