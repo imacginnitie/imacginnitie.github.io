@@ -25,13 +25,26 @@ layout: default
           {% endif %}
           {% if page.profile.random %}
             <div class="profile-photo-container" style="position: relative;">
+              {% comment %}
+                Sources are held in data-* attributes so the browser fetches only the photo
+                that gets picked, not all of them. See the pickPhoto() script below.
+              {% endcomment %}
               {% for photo in site.profile_photos %}
+                {% assign photo_base = photo.file | split: '.' | first %}
                 <figure class="profile-photo-figure" style="display: none; margin: 0;" data-rarity="{{ photo.rarity | default: 'common' }}">
-                  <img
-                    src="/assets/img/pfp/{{ photo.file }}"
-                    class="{{ profile_image_class }}"
-                    alt="Profile photo"
-                  >
+                  <picture>
+                    <source
+                      type="image/webp"
+                      data-srcset="/assets/img/pfp/{{ photo_base }}-480.webp 480w, /assets/img/pfp/{{ photo_base }}-800.webp 800w"
+                      sizes="(min-width: 576px) 30vw, 100vw"
+                    >
+                    <img
+                      data-src="/assets/img/pfp/{{ photo.file }}"
+                      class="{{ profile_image_class }}"
+                      style="aspect-ratio: 1 / 1;"
+                      alt="Profile photo"
+                    >
+                  </picture>
                   {% if photo.caption and photo.caption != "" %}
                     <figcaption style="margin-top: 0.5rem; font-size: 0.85rem; font-style: italic; text-align: center; opacity: 0.7;">{{ photo.caption }}</figcaption>
                   {% endif %}
@@ -53,6 +66,21 @@ layout: default
                     if (tiers[rarity]) tiers[rarity].push(idx);
                   });
 
+                  // Promote data-src/data-srcset to real attributes the first time a
+                  // photo is shown, so unpicked photos are never fetched.
+                  function loadPhoto(fig) {
+                    const source = fig.querySelector('source[data-srcset]');
+                    if (source) {
+                      source.srcset = source.dataset.srcset;
+                      delete source.dataset.srcset;
+                    }
+                    const img = fig.querySelector('img[data-src]');
+                    if (img) {
+                      img.src = img.dataset.src;
+                      delete img.dataset.src;
+                    }
+                  }
+
                   function pickPhoto() {
                     // Hide all
                     figures.forEach(fig => fig.style.display = 'none');
@@ -69,6 +97,7 @@ layout: default
                     // Pick random photo within the tier
                     const pool = tiers[selectedTier];
                     const selectedIdx = pool[Math.floor(Math.random() * pool.length)];
+                    loadPhoto(figures[selectedIdx]);
                     figures[selectedIdx].style.display = 'block';
                   }
 

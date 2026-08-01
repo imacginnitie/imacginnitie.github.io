@@ -369,7 +369,7 @@ imagemagick:
 #   You can also set loading="" to other values for specific images to override the default behavior.
 #   Options: "auto", "eager", "lazy"
 #   See https://web.dev/browser-level-image-lazy-loading/ for more information.
-lazy_loading_images: false # enables lazy loading of images (recommended)
+lazy_loading_images: true # enables lazy loading of images (recommended)
 
 # -----------------------------------------------------------------------------
 # Optional Features
@@ -653,19 +653,19 @@ profile_photos:
   - file: graduation-72.jpg
     rarity: common
     caption: "Claremont, 2023"
-  - file: hawaii.JPG
+  - file: hawaii.jpg
     rarity: secret
     caption: "Hawaii, 2006"
   - file: la_jolla.jpg
     rarity: common
     caption: "La Jolla, 2025"
-  - file: little_saigon.JPG
+  - file: little_saigon.jpg
     rarity: common
     caption: "Little Saigon, 2025"
   - file: osaka.jpeg
     rarity: common
     caption: "Osaka, 2023"
-  - file: passport.JPG
+  - file: passport.jpg
     rarity: rare
     caption: "USA, 2021"
   - file: pikmin.jpg
