@@ -173,6 +173,63 @@ layout: default
             return '<em>' + escapeHtml(label || 'Previously:') + '</em>' + rows;
           }
 
+          var MAX_TITLE_LEN = 40;
+
+          function starString(rating) {
+            var r = Math.max(0, Math.min(5, parseInt(rating, 10) || 0));
+            if (!r) return '';
+            return '★'.repeat(r);
+          }
+
+          // Keep tooltip lines from overflowing: if a title is too long, first try
+          // dropping a trailing subtitle (after ":" / "–" / "—" / " - "); if it's
+          // still too long, hard-truncate on a word boundary with an ellipsis.
+          function shortenTitle(title, max) {
+            if (!title || title.length <= max) return title;
+            var sep = title.match(/[:–—]| - /);
+            if (sep && sep.index >= 4) {
+              var main = title.slice(0, sep.index).trim();
+              if (main.length >= 4) title = main;
+            }
+            if (title.length <= max) return title;
+            var cut = title.slice(0, max).replace(/\s+\S*$/, '').trim();
+            return (cut.length ? cut : title.slice(0, max).trim()) + '…';
+          }
+
+          function dedupeBooksByTitle(books) {
+            if (!books || !books.length) return [];
+            const seen = new Set();
+            const out = [];
+            for (let i = 0; i < books.length; i++) {
+              const b = books[i];
+              if (!b || !b.title || seen.has(b.title)) continue;
+              seen.add(b.title);
+              out.push(b);
+            }
+            return out;
+          }
+
+          function booksTooltipHtml(books, label) {
+            if (!books || !books.length) return null;
+            var rows = books
+              .map(function (b) {
+                var html = escapeHtml(shortenTitle(b.title, MAX_TITLE_LEN));
+                if (b.author) {
+                  html +=
+                    ' <span class="reading-tooltip-author">— ' +
+                    escapeHtml(b.author) +
+                    '</span>';
+                }
+                var stars = starString(b.rating);
+                if (stars) {
+                  html += ' <span class="reading-tooltip-stars">' + stars + '</span>';
+                }
+                return '<span class="reading-tooltip-line">' + html + '</span>';
+              })
+              .join('');
+            return '<em>' + escapeHtml(label || 'Previously:') + '</em>' + rows;
+          }
+
           document.addEventListener('DOMContentLoaded', function () {
             if (typeof jQuery === 'undefined') return;
             var $ = jQuery;
@@ -186,7 +243,7 @@ layout: default
             const bookTitle = {% if reading_data.current_book %}{{ reading_data.current_book.title | jsonify }}{% else %}{{ reading_data.last_read_book.title | jsonify }}{% endif %};
             const bookAuthor = {% if reading_data.current_book %}{% if reading_data.current_book.author %}{{ reading_data.current_book.author | jsonify }}{% else %}null{% endif %}{% else %}{% if reading_data.last_read_book.author %}{{ reading_data.last_read_book.author | jsonify }}{% else %}null{% endif %}{% endif %};
 
-            const previousBookTitlesRaw = {{ reading_data.previous_book_titles | jsonify }} || [];
+            const previousBooksRaw = {{ reading_data.previous_books | jsonify }} || [];
             const hasLastfm = {{ has_lastfm | jsonify }};
             {% if has_lastfm %}
             const topArtists = {{ lastfm_data.top_artists | jsonify }} || [];
@@ -198,10 +255,12 @@ layout: default
 
             const readingLead = {{ reading_lead | jsonify }};
 
-            const previousBookTitles = dedupePreservingOrder(previousBookTitlesRaw).filter(function (t) {
-              return t && t !== bookTitle;
-            });
-            const bookTip = previousTooltipHtml(previousBookTitles);
+            const previousBooks = dedupeBooksByTitle(previousBooksRaw)
+              .filter(function (b) {
+                return b && b.title && b.title !== bookTitle;
+              })
+              .slice(0, 2);
+            const bookTip = booksTooltipHtml(previousBooks);
             const $bookPhrase = $('<span>');
             if (bookTip) {
               $bookPhrase.attr('tabindex', '0');

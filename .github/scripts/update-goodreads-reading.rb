@@ -9,70 +9,77 @@ require 'fileutils'
 USER_ID = ENV['GOODREADS_USER_ID'] || '155965994'
 DATA_DIR = '_data'
 DATA_FILE = File.join(DATA_DIR, 'goodreads-reading.json')
-PREVIOUS_LIMIT = 3
+# How many recently-read books to keep for the "Previously" hover. We store one
+# extra so the hover can still show a few even when nothing is currently-reading
+# (in which case the most recent read fills the sentence itself).
+READ_SHELF_LIMIT = 4
 
 def clean_title(title)
-  # Remove parenthetical phrases at the end of titles
+  # Remove parenthetical phrases at the end of titles, e.g. "(Star Wars)".
   title.gsub(/\s*\([^)]+\)\s*$/, '').strip
 end
 
-def book_identity(book)
-  return nil if book.nil?
-
-  bid = book['book_id'].to_s.strip
-  return bid unless bid.empty?
-
-  book['title'].to_s.strip
-end
-
-def extract_first_book_from_xml(xml)
-  doc = Nokogiri::XML(xml) do |config|
-    config.nonet.noblanks
-  end
-
-  first_item = doc.xpath('//item').first
-  return nil unless first_item
-
-  title_node = first_item.xpath('title').first
-  raw_title = title_node ? title_node.text.strip : ''
-  title = clean_title(raw_title)
-
-  author_node = first_item.xpath('author_name').first
-  author = author_node ? author_node.text.strip : ''
-
-  book_id_node = first_item.xpath('book_id').first
-  book_id = book_id_node ? book_id_node.text.strip : nil
-
-  book_url = if book_id && !book_id.empty?
+def book_url(book_id, fallback_link)
+  if book_id && !book_id.to_s.strip.empty?
     "https://www.goodreads.com/book/show/#{book_id}"
   else
-    link_node = first_item.xpath('link').first
-    link_node ? link_node.text.strip : ''
+    fallback_link.to_s.strip
   end
+end
 
+def text_at(item, tag)
+  node = item.xpath(tag).first
+  node ? node.text.strip : ''
+end
+
+# Parse a single <item> from a Goodreads shelf RSS feed. Returns nil for items
+# without a usable title. `rating` is 0 when unrated (you only rate on finishing).
+def parse_item(item)
+  title = clean_title(text_at(item, 'title'))
   return nil if title.empty?
+
+  book_id = text_at(item, 'book_id')
 
   {
     'title' => title,
-    'author' => author,
-    'url' => book_url,
-    'book_id' => book_id
+    'author' => text_at(item, 'author_name'),
+    'url' => book_url(book_id, text_at(item, 'link')),
+    'book_id' => (book_id.empty? ? nil : book_id),
+    'rating' => text_at(item, 'user_rating').to_i
   }
 end
 
-# Fetch currently reading books
-current_book = nil
-last_read_book = nil
+def fetch_shelf(shelf, extra = '')
+  url = "https://www.goodreads.com/review/list_rss/#{USER_ID}?shelf=#{shelf}#{extra}"
+  xml = HTTParty.get(url, timeout: 10).body
+  return [] if xml.nil? || xml.strip.empty?
 
-currently_reading_url = "https://www.goodreads.com/review/list_rss/#{USER_ID}?shelf=currently-reading"
-begin
-  xml = HTTParty.get(currently_reading_url, timeout: 10).body
-  if xml && !xml.strip.empty?
-    current_book = extract_first_book_from_xml(xml)
+  doc = Nokogiri::XML(xml) do |config|
+    config.nonet.noblanks
   end
+  doc.xpath('//item').map { |item| parse_item(item) }.compact
 rescue => e
-  STDERR.puts "Warning: Failed to fetch currently-reading shelf: #{e.message}"
+  STDERR.puts "Warning: Failed to fetch #{shelf} shelf: #{e.message}"
+  []
 end
+
+# Currently reading (may be empty). Drop the rating: you rate on finishing, so a
+# rating on an in-progress book is meaningless / misleading.
+current_book = fetch_shelf('currently-reading').first
+current_book = current_book.reject { |k, _| k == 'rating' } if current_book
+
+# Recently read, newest first, with author + rating for the "Previously" hover.
+previous_books = fetch_shelf('read', '&sort=date_read&order=d').first(READ_SHELF_LIMIT)
+
+# Most recent read, used as the sentence subject when nothing is currently-reading.
+last_read_book = previous_books.first
+
+new_data = {
+  'current_book' => current_book,
+  'last_read_book' => last_read_book,
+  'previous_books' => previous_books,
+  'last_updated' => Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+}
 
 existing_data = {}
 if File.exist?(DATA_FILE)
@@ -83,36 +90,6 @@ if File.exist?(DATA_FILE)
   end
 end
 
-previous_titles = existing_data['previous_book_titles'] || []
-old_current = existing_data['current_book']
-old_last_read = existing_data['last_read_book']
-
-# Derive "last read" from the previously-current book, so editing an old review
-# doesn't reorder what we consider "last read".
-#
-# Heuristic:
-# - If the current book changed (including disappearing), treat the previous current
-#   as the most recent "last read".
-if book_identity(old_current) && book_identity(old_current) != book_identity(current_book)
-  last_read_book = old_current
-else
-  last_read_book = old_last_read
-end
-
-if book_identity(old_current) != book_identity(current_book)
-  if old_current && !old_current['title'].to_s.strip.empty?
-    t = old_current['title'].strip
-    previous_titles = ([t] + previous_titles).uniq.take(PREVIOUS_LIMIT)
-  end
-end
-
-new_data = {
-  'current_book' => current_book,
-  'last_read_book' => last_read_book,
-  'previous_book_titles' => previous_titles,
-  'last_updated' => Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
-}
-
 data_changed = (new_data.to_json != existing_data.to_json)
 
 FileUtils.mkdir_p(DATA_DIR)
@@ -120,8 +97,7 @@ File.write(DATA_FILE, JSON.pretty_generate(new_data))
 
 puts 'Goodreads reading data updated'
 puts "Current book: #{current_book ? current_book['title'] : 'None'}"
-puts "Last read book: #{last_read_book ? last_read_book['title'] : 'None'}"
-puts "Previous titles: #{previous_titles.inspect}"
+puts "Previous books: #{previous_books.map { |b| "#{b['title']} (#{b['rating']}★)" }.inspect}"
 puts "Data changed: #{data_changed}"
 
 exit 0

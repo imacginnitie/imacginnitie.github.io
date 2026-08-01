@@ -61,6 +61,16 @@
         margin-top: 0.2em;
       }
     }
+
+    .reading-tooltip-author {
+      color: var(--global-text-color-light);
+    }
+
+    .reading-tooltip-stars {
+      color: var(--global-text-color-light);
+      letter-spacing: 0.05em;
+      font-size: 0.85em;
+    }
   }
 }
 

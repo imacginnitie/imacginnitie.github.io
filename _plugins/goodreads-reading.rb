@@ -21,7 +21,7 @@ module GoodreadsReading
 
       current_book = nil
       last_read_book = nil
-      previous_book_titles = []
+      previous_books = []
 
       # Try to read from cached JSON file first
       data_file = File.join(site.source, '_data', 'goodreads-reading.json')
@@ -30,19 +30,18 @@ module GoodreadsReading
           data = JSON.parse(File.read(data_file))
           current_book = data['current_book']
           last_read_book = data['last_read_book']
-          previous_book_titles = data['previous_book_titles'] || []
+          previous_books = data['previous_books'] || []
           Jekyll.logger.info 'Goodreads Reading:', 'Loaded from cache file'
         rescue => e
           Jekyll.logger.warn 'Goodreads Reading:', "Failed to read cache file: #{e.message}. Fetching live..."
         end
       end
 
-      # If cache file doesn't exist or parsing failed, fetch live.
-      #
-      # Important: we intentionally do NOT derive `last_read_book` from the "read"
-      # shelf RSS feed, because Goodreads can reorder that feed when an old review
-      # is edited. Instead, `last_read_book` is tracked locally by the updater
-      # workflow (derived from the previously-current book).
+      # If cache file doesn't exist or parsing failed, fall back to a minimal live
+      # fetch of just the currently-reading shelf. The richer data (last read,
+      # previous books with author + rating) is produced by the updater workflow
+      # in .github/scripts/update-goodreads-reading.rb and committed to the cache
+      # file above; we don't replicate that here.
       if current_book.nil?
         currently_reading_url = "https://www.goodreads.com/review/list_rss/#{user_id}?shelf=currently-reading"
         begin
@@ -58,7 +57,7 @@ module GoodreadsReading
       site.data['goodreads_reading'] = {
         'current_book' => current_book,
         'last_read_book' => last_read_book,
-        'previous_book_titles' => previous_book_titles
+        'previous_books' => previous_books
       }
     end
 
