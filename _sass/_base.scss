@@ -1497,37 +1497,55 @@ mjx-container[jax="CHTML"][display="true"] {
   overflow-x: auto;
 }
 
-/* Tooltip from https://www.w3schools.com/css/css_tooltip.asp */
+/* Glossary tooltip (about page), styled to match the reading/artist tooltip. */
 .jekyll-glossary {
   position: relative;
   display: inline-block;
-  border-bottom: 2px dotted #0074bd;
   cursor: help;
+  border-bottom: 1px dotted var(--global-theme-color);
+  padding-bottom: 1px;
 }
 
 .jekyll-glossary .jekyll-glossary-tooltip {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  font-size: 0.5em;
-  padding: 5px;
-  border-radius: 6px;
-
-  /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
-
-  width: 160px;
   bottom: 100%;
   left: 50%;
-  margin-left: -80px; /* Use half of the width to center the tooltip */
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+
+  width: max-content;
+  min-width: 12rem;
+  max-width: min(92vw, 36rem);
+
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  padding: 0.65rem 1rem;
+  color: var(--global-text-color);
+  background-color: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+
+  opacity: 0;
+  transition: opacity 0.15s;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
+html[data-theme="dark"] .jekyll-glossary .jekyll-glossary-tooltip {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Show the tooltip text when you mouse over the tooltip container.
+ * Opacity of 0.9 matches Bootstrap's default `.tooltip.show` styling used
+ * by the reading/artist tooltips, so both look the same. */
 .jekyll-glossary:hover .jekyll-glossary-tooltip {
   visibility: visible;
+  opacity: 0.9;
 }
 
 /* Style the source link (if there is one provided in the glossary entry). */
@@ -1544,16 +1562,7 @@ mjx-container[jax="CHTML"][display="true"] {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: black transparent transparent transparent;
-}
-
-/* Animation from invisible to visible on hover. */
-.jekyll-glossary .jekyll-glossary-tooltip {
-  opacity: 0;
-  transition: opacity 1s;
-}
-.jekyll-glossary:hover .jekyll-glossary-tooltip {
-  opacity: 1;
+  border-color: var(--global-card-bg-color) transparent transparent transparent;
 }
 
 /* HACK: hide surrounding parenthesis on definition. When Jekyll renders
