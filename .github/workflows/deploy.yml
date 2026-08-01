@@ -101,6 +101,16 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
+      - name: Cache generated WebP images 🖼️
+        # jekyll-imagemagick writes responsive .webp variants into _site/ and
+        # regenerates any that are missing or older than their source. The runner
+        # starts with an empty _site/, so without this cache every build (including
+        # data-only pushes from the Last.fm/Goodreads updaters) reconverts every
+        # image. Keyed on the source images, so it only misses when images change.
+        uses: actions/cache@v4
+        with:
+          path: _site/assets/img
+          key: webp-${{ hashFiles('assets/img/**') }}
       - name: Install and Build 🔧
         run: |
           sudo apt-get update && sudo apt-get install -y imagemagick
