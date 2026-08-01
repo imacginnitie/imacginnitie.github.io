@@ -162,7 +162,7 @@ layout: default
           var readingTooltipTemplate =
             '<div class="tooltip reading-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>';
 
-          function previousTooltipHtml(lines) {
+          function previousTooltipHtml(lines, label) {
             if (!lines || !lines.length) return null;
             var rows = lines
               .map(escapeHtml)
@@ -170,7 +170,7 @@ layout: default
                 return '<span class="reading-tooltip-line">' + line + '</span>';
               })
               .join('');
-            return '<em>Previously:</em>' + rows;
+            return '<em>' + escapeHtml(label || 'Previously:') + '</em>' + rows;
           }
 
           document.addEventListener('DOMContentLoaded', function () {
@@ -189,10 +189,10 @@ layout: default
             const previousBookTitlesRaw = {{ reading_data.previous_book_titles | jsonify }} || [];
             const hasLastfm = {{ has_lastfm | jsonify }};
             {% if has_lastfm %}
-            const previousArtists = {{ lastfm_data.previous_artists | jsonify }} || [];
-            const artistName = {{ lastfm_data.artist | jsonify }};
+            const topArtists = {{ lastfm_data.top_artists | jsonify }} || [];
+            const artistName = topArtists[0] || {{ lastfm_data.artist | jsonify }};
             {% else %}
-            const previousArtists = [];
+            const topArtists = [];
             const artistName = null;
             {% endif %}
 
@@ -220,10 +220,10 @@ layout: default
 
             let $artist = null;
             if (hasLastfm && artistName) {
-              const artistLines = dedupePreservingOrder(previousArtists).filter(function (a) {
-                return a !== artistName;
+              const artistLines = dedupePreservingOrder(topArtists).filter(function (a) {
+                return a && a !== artistName;
               });
-              const artistTip = previousTooltipHtml(artistLines);
+              const artistTip = previousTooltipHtml(artistLines, 'Also:');
               $artist = $('<span tabindex="0">').text(artistName);
               if (artistTip) {
                 $artist.addClass('reading-hover');
