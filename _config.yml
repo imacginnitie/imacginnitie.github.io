@@ -35,6 +35,13 @@ repo_trophies:
   theme_dark: gitdimmed # https://github.com/ryo-ma/github-profile-trophy
 
 # -----------------------------------------------------------------------------
+# Goodreads Reading
+# -----------------------------------------------------------------------------
+goodreads_reading:
+  enabled: true # enables displaying currently reading book on about page
+  user_id: 155965994 # your Goodreads user ID (the number in your profile URL)
+
+# -----------------------------------------------------------------------------
 # RSS Feed
 # -----------------------------------------------------------------------------
 # will use title and url fields

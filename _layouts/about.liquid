@@ -45,15 +45,17 @@ layout: default
                       alt="Profile photo"
                     >
                   </picture>
-                  {% if photo.caption and photo.caption != "" %}
-                    <figcaption style="margin-top: 0.5rem; font-size: 0.85rem; font-style: italic; text-align: center; opacity: 0.7;">{{ photo.caption }}</figcaption>
+                  {% if photo.caption and photo.caption != '' %}
+                    <figcaption style="margin-top: 0.5rem; font-size: 0.85rem; font-style: italic; text-align: center; opacity: 0.7;">
+                      {{ photo.caption }}
+                    </figcaption>
                   {% endif %}
                 </figure>
               {% endfor %}
             </div>
 
             <script>
-              (function() {
+              (function () {
                 // 60% common, 30% rare, 10% secret
                 const tierWeights = { common: 60, rare: 30, secret: 10 };
                 const figures = document.querySelectorAll('.profile-photo-figure');
@@ -83,7 +85,7 @@ layout: default
 
                   function pickPhoto() {
                     // Hide all
-                    figures.forEach(fig => fig.style.display = 'none');
+                    figures.forEach((fig) => (fig.style.display = 'none'));
                     // Pick a tier (weighted), falling back if tier is empty
                     const roll = Math.random() * 100;
                     let selectedTier;
@@ -120,6 +122,129 @@ layout: default
     {% endif %}
 
     <div class="clearfix">{{ content }}</div>
+
+    <!-- Currently Reading and Listening - inline with last paragraph -->
+    <!-- Goodreads + Last.fm "now reading / listening" feature borrowed without
+         asking from Andy's site: https://github.com/andyjliu/andyjliu.github.io lol -->
+
+    {% assign reading_data = site.data.goodreads_reading %}
+    {% assign lastfm_data = site.data.lastfm %}
+    {% assign has_lastfm = false %}
+    {% if lastfm_data and lastfm_data.artist %}
+      {% assign has_lastfm = true %}
+    {% endif %}
+    {% if reading_data and (reading_data.current_book or reading_data.last_read_book) %}
+      {% assign reading_lead = ' I am currently reading ' %}
+      <script>
+        (function () {
+          function escapeHtml(s) {
+            return String(s)
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;');
+          }
+
+          function dedupePreservingOrder(items) {
+            if (!items || !items.length) return [];
+            const seen = new Set();
+            const out = [];
+            for (let i = 0; i < items.length; i++) {
+              if (seen.has(items[i])) continue;
+              seen.add(items[i]);
+              out.push(items[i]);
+            }
+            return out;
+          }
+
+          var readingTooltipTemplate =
+            '<div class="tooltip reading-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>';
+
+          function previousTooltipHtml(lines) {
+            if (!lines || !lines.length) return null;
+            var rows = lines
+              .map(escapeHtml)
+              .map(function (line) {
+                return '<span class="reading-tooltip-line">' + line + '</span>';
+              })
+              .join('');
+            return '<em>Previously:</em>' + rows;
+          }
+
+          document.addEventListener('DOMContentLoaded', function () {
+            if (typeof jQuery === 'undefined') return;
+            var $ = jQuery;
+
+            const contentDiv = document.querySelector('.clearfix');
+            if (!contentDiv) return;
+            const paragraphs = contentDiv.querySelectorAll('p');
+            if (paragraphs.length === 0) return;
+            const lastParagraph = paragraphs[paragraphs.length - 1];
+
+            const bookTitle = {% if reading_data.current_book %}{{ reading_data.current_book.title | jsonify }}{% else %}{{ reading_data.last_read_book.title | jsonify }}{% endif %};
+            const bookAuthor = {% if reading_data.current_book %}{% if reading_data.current_book.author %}{{ reading_data.current_book.author | jsonify }}{% else %}null{% endif %}{% else %}{% if reading_data.last_read_book.author %}{{ reading_data.last_read_book.author | jsonify }}{% else %}null{% endif %}{% endif %};
+
+            const previousBookTitlesRaw = {{ reading_data.previous_book_titles | jsonify }} || [];
+            const hasLastfm = {{ has_lastfm | jsonify }};
+            {% if has_lastfm %}
+            const previousArtists = {{ lastfm_data.previous_artists | jsonify }} || [];
+            const artistName = {{ lastfm_data.artist | jsonify }};
+            {% else %}
+            const previousArtists = [];
+            const artistName = null;
+            {% endif %}
+
+            const readingLead = {{ reading_lead | jsonify }};
+
+            const previousBookTitles = dedupePreservingOrder(previousBookTitlesRaw).filter(function (t) {
+              return t && t !== bookTitle;
+            });
+            const bookTip = previousTooltipHtml(previousBookTitles);
+            const $bookPhrase = $('<span>');
+            if (bookTip) {
+              $bookPhrase.attr('tabindex', '0');
+              $bookPhrase.addClass('reading-hover');
+              $bookPhrase.tooltip({
+                html: true,
+                title: bookTip,
+                template: readingTooltipTemplate,
+                container: 'body',
+              });
+            }
+            $bookPhrase.append(document.createTextNode(bookTitle));
+            if (bookAuthor) {
+              $bookPhrase.append(document.createTextNode(' by ' + bookAuthor));
+            }
+
+            let $artist = null;
+            if (hasLastfm && artistName) {
+              const artistLines = dedupePreservingOrder(previousArtists).filter(function (a) {
+                return a !== artistName;
+              });
+              const artistTip = previousTooltipHtml(artistLines);
+              $artist = $('<span tabindex="0">').text(artistName);
+              if (artistTip) {
+                $artist.addClass('reading-hover');
+                $artist.tooltip({
+                  html: true,
+                  title: artistTip,
+                  template: readingTooltipTemplate,
+                  container: 'body',
+                });
+              }
+            }
+
+            $(lastParagraph).append(document.createTextNode(readingLead));
+            $(lastParagraph).append($bookPhrase);
+            if ($artist) {
+              $(lastParagraph).append(document.createTextNode(' and listening to '));
+              $(lastParagraph).append($artist);
+            }
+            $(lastParagraph).append(document.createTextNode('.'));
+          });
+        })();
+      </script>
+    {% endif %}
 
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}

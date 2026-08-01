@@ -28,3 +28,5 @@ latest_posts:
 I am an incoming PhD student in Computer Science & Engineering at the University of Washington, advised by [Max Kleiman-Weiner](https://faculty.washington.edu/maxkw/) and supported by the [NSF CSGrad4US](https://www.nsf.gov/cise/graduate-fellowships) fellowship. I am interested in {% glossary technical %} and {% glossary normative %} AI alignment with a focus on research that promotes humanity's ability to learn, advance, and flourish in a world with transformative AI.
 
 Previously, I was a research fellow at [Athena](https://researchathena.org/), an incredible program for women interested in AI alignment, where I investigated using emojis and filler tokens to obscure chain-of-thought. Before transitioning to research, I was the first hire at [RetroRate](https://www.retrorate.com/) and a software engineer at [Color](https://www.color.com/). I graduated from Harvey Mudd College in 2023 with a BS in computer science and math.
+
+In my free time, I enjoy hiking, photography, and cooking (especially fermentation!). 

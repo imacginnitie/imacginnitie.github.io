@@ -1,0 +1,9 @@
+---
+# This file is auto-generated daily by .github/workflows/update-lastfm.yml.
+# It stays empty (no music shown) until you add the LASTFM_API_KEY repo secret
+# and the workflow runs for the first time.
+artist:
+url:
+profile: https://www.last.fm/user/isabel-mp3
+updated:
+previous_artists: []
