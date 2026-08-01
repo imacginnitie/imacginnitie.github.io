@@ -81,7 +81,7 @@
           var readingTooltipTemplate =
             '<div class="tooltip reading-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>';
 
-          function previousTooltipHtml(lines) {
+          function previousTooltipHtml(lines, label) {
             if (!lines || !lines.length) return null;
             var rows = lines
               .map(escapeHtml)
@@ -89,7 +89,64 @@
                 return '<span class="reading-tooltip-line">' + line + '</span>';
               })
               .join('');
-            return '<em>Previously:</em>' + rows;
+            return '<em>' + escapeHtml(label || 'Previously:') + '</em>' + rows;
+          }
+
+          var MAX_TITLE_LEN = 40;
+
+          function starString(rating) {
+            var r = Math.max(0, Math.min(5, parseInt(rating, 10) || 0));
+            if (!r) return '';
+            return '★'.repeat(r);
+          }
+
+          // Keep tooltip lines from overflowing: if a title is too long, first try
+          // dropping a trailing subtitle (after ":" / "–" / "—" / " - "); if it's
+          // still too long, hard-truncate on a word boundary with an ellipsis.
+          function shortenTitle(title, max) {
+            if (!title || title.length <= max) return title;
+            var sep = title.match(/[:–—]| - /);
+            if (sep && sep.index >= 4) {
+              var main = title.slice(0, sep.index).trim();
+              if (main.length >= 4) title = main;
+            }
+            if (title.length <= max) return title;
+            var cut = title.slice(0, max).replace(/\s+\S*$/, '').trim();
+            return (cut.length ? cut : title.slice(0, max).trim()) + '…';
+          }
+
+          function dedupeBooksByTitle(books) {
+            if (!books || !books.length) return [];
+            const seen = new Set();
+            const out = [];
+            for (let i = 0; i < books.length; i++) {
+              const b = books[i];
+              if (!b || !b.title || seen.has(b.title)) continue;
+              seen.add(b.title);
+              out.push(b);
+            }
+            return out;
+          }
+
+          function booksTooltipHtml(books, label) {
+            if (!books || !books.length) return null;
+            var rows = books
+              .map(function (b) {
+                var html = escapeHtml(shortenTitle(b.title, MAX_TITLE_LEN));
+                if (b.author) {
+                  html +=
+                    ' <span class="reading-tooltip-author">— ' +
+                    escapeHtml(b.author) +
+                    '</span>';
+                }
+                var stars = starString(b.rating);
+                if (stars) {
+                  html += ' <span class="reading-tooltip-stars">' + stars + '</span>';
+                }
+                return '<span class="reading-tooltip-line">' + html + '</span>';
+              })
+              .join('');
+            return '<em>' + escapeHtml(label || 'Previously:') + '</em>' + rows;
           }
 
           document.addEventListener('DOMContentLoaded', function () {
@@ -102,22 +159,24 @@
             if (paragraphs.length === 0) return;
             const lastParagraph = paragraphs[paragraphs.length - 1];
 
-            const bookTitle = "Trails of History: The story of Mount Desert Island's Paths from Norumbega to Acadia";
-            const bookAuthor = "Tom St. Germain";
+            const bookTitle = "Dooku: Jedi Lost";
+            const bookAuthor = "Cavan Scott";
 
-            const previousBookTitlesRaw = [] || [];
+            const previousBooksRaw = [{"title":"Brotherhood","author":"Mike Chen","url":"https://www.goodreads.com/book/show/58890947","book_id":"58890947","rating":3},{"title":"Shadow of the Solstice: A Leaphorn, Chee \u0026 Manuelito Novel","author":"Anne Hillerman","url":"https://www.goodreads.com/book/show/216793596","book_id":"216793596","rating":2},{"title":"Star Wars: Revenge of the Sith","author":"Matthew Woodring Stover","url":"https://www.goodreads.com/book/show/35458","book_id":"35458","rating":4},{"title":"A Psalm for the Wild-Built","author":"Becky Chambers","url":"https://www.goodreads.com/book/show/40864002","book_id":"40864002","rating":1}] || [];
             const hasLastfm = true;
             
-            const previousArtists = [] || [];
-            const artistName = "Ninajirachi";
+            const topArtists = ["Ninajirachi","Slayyyter","glaive"] || [];
+            const artistName = topArtists[0] || "Ninajirachi";
             
 
             const readingLead = " I am currently reading ";
 
-            const previousBookTitles = dedupePreservingOrder(previousBookTitlesRaw).filter(function (t) {
-              return t && t !== bookTitle;
-            });
-            const bookTip = previousTooltipHtml(previousBookTitles);
+            const previousBooks = dedupeBooksByTitle(previousBooksRaw)
+              .filter(function (b) {
+                return b && b.title && b.title !== bookTitle;
+              })
+              .slice(0, 2);
+            const bookTip = booksTooltipHtml(previousBooks);
             const $bookPhrase = $('<span>');
             if (bookTip) {
               $bookPhrase.attr('tabindex', '0');
@@ -136,10 +195,10 @@
 
             let $artist = null;
             if (hasLastfm && artistName) {
-              const artistLines = dedupePreservingOrder(previousArtists).filter(function (a) {
-                return a !== artistName;
+              const artistLines = dedupePreservingOrder(topArtists).filter(function (a) {
+                return a && a !== artistName;
               });
-              const artistTip = previousTooltipHtml(artistLines);
+              const artistTip = previousTooltipHtml(artistLines, 'Also:');
               $artist = $('<span tabindex="0">').text(artistName);
               if (artistTip) {
                 $artist.addClass('reading-hover');
