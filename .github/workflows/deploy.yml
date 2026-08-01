@@ -61,6 +61,12 @@ on:
       - "!FAQ.md"
       - "!INSTALL.md"
       - "!README.md"
+  # Runs after the Last.fm / Goodreads updaters commit new data. A push made by a
+  # workflow's built-in GITHUB_TOKEN does NOT trigger the `on: push` above, so we
+  # trigger the deploy off the update workflows completing instead.
+  workflow_run:
+    workflows: ["Update Last.fm Top Artist", "Update Goodreads Reading"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -70,6 +76,11 @@ jobs:
   deploy:
     # available images: https://github.com/actions/runner-images#available-images
     runs-on: ubuntu-latest
+    # For workflow_run, only deploy if the updater actually succeeded. Push /
+    # pull_request / manual runs are unaffected by this guard.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
