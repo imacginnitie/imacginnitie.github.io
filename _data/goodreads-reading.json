@@ -1,18 +1,25 @@
 {
   "current_book": {
+    "title": "Master and Apprentice",
+    "author": "Claudia Gray",
+    "url": "https://www.goodreads.com/book/show/40917496",
+    "book_id": "40917496"
+  },
+  "last_read_book": {
     "title": "Dooku: Jedi Lost",
     "author": "Cavan Scott",
     "url": "https://www.goodreads.com/book/show/44643629",
-    "book_id": "44643629"
-  },
-  "last_read_book": {
-    "title": "Brotherhood",
-    "author": "Mike Chen",
-    "url": "https://www.goodreads.com/book/show/58890947",
-    "book_id": "58890947",
+    "book_id": "44643629",
     "rating": 3
   },
   "previous_books": [
+    {
+      "title": "Dooku: Jedi Lost",
+      "author": "Cavan Scott",
+      "url": "https://www.goodreads.com/book/show/44643629",
+      "book_id": "44643629",
+      "rating": 3
+    },
     {
       "title": "Brotherhood",
       "author": "Mike Chen",
@@ -33,14 +40,7 @@
       "url": "https://www.goodreads.com/book/show/35458",
       "book_id": "35458",
       "rating": 4
-    },
-    {
-      "title": "A Psalm for the Wild-Built",
-      "author": "Becky Chambers",
-      "url": "https://www.goodreads.com/book/show/40864002",
-      "book_id": "40864002",
-      "rating": 1
     }
   ],
-  "last_updated": "2026-08-09T01:16:28Z"
+  "last_updated": "2026-08-10T01:18:16Z"
 }
