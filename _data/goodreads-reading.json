@@ -1,18 +1,25 @@
 {
   "current_book": {
+    "title": "Queen's Peril",
+    "author": "E.K. Johnston",
+    "url": "https://www.goodreads.com/book/show/49000155",
+    "book_id": "49000155"
+  },
+  "last_read_book": {
     "title": "Master and Apprentice",
     "author": "Claudia Gray",
     "url": "https://www.goodreads.com/book/show/40917496",
-    "book_id": "40917496"
-  },
-  "last_read_book": {
-    "title": "Dooku: Jedi Lost",
-    "author": "Cavan Scott",
-    "url": "https://www.goodreads.com/book/show/44643629",
-    "book_id": "44643629",
-    "rating": 3
+    "book_id": "40917496",
+    "rating": 4
   },
   "previous_books": [
+    {
+      "title": "Master and Apprentice",
+      "author": "Claudia Gray",
+      "url": "https://www.goodreads.com/book/show/40917496",
+      "book_id": "40917496",
+      "rating": 4
+    },
     {
       "title": "Dooku: Jedi Lost",
       "author": "Cavan Scott",
@@ -33,14 +40,7 @@
       "url": "https://www.goodreads.com/book/show/216793596",
       "book_id": "216793596",
       "rating": 2
-    },
-    {
-      "title": "Star Wars: Revenge of the Sith",
-      "author": "Matthew Woodring Stover",
-      "url": "https://www.goodreads.com/book/show/35458",
-      "book_id": "35458",
-      "rating": 4
     }
   ],
-  "last_updated": "2026-08-16T00:58:52Z"
+  "last_updated": "2026-08-17T00:57:07Z"
 }
