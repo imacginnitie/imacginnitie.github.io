@@ -1,18 +1,25 @@
 {
   "current_book": {
+    "title": "Trails of History: The story of Mount Desert Island's Paths from Norumbega to Acadia",
+    "author": "Tom St. Germain",
+    "url": "https://www.goodreads.com/book/show/5010437",
+    "book_id": "5010437"
+  },
+  "last_read_book": {
     "title": "Queen's Peril",
     "author": "E.K. Johnston",
     "url": "https://www.goodreads.com/book/show/49000155",
-    "book_id": "49000155"
-  },
-  "last_read_book": {
-    "title": "Master and Apprentice",
-    "author": "Claudia Gray",
-    "url": "https://www.goodreads.com/book/show/40917496",
-    "book_id": "40917496",
-    "rating": 4
+    "book_id": "49000155",
+    "rating": 3
   },
   "previous_books": [
+    {
+      "title": "Queen's Peril",
+      "author": "E.K. Johnston",
+      "url": "https://www.goodreads.com/book/show/49000155",
+      "book_id": "49000155",
+      "rating": 3
+    },
     {
       "title": "Master and Apprentice",
       "author": "Claudia Gray",
@@ -33,14 +40,7 @@
       "url": "https://www.goodreads.com/book/show/58890947",
       "book_id": "58890947",
       "rating": 3
-    },
-    {
-      "title": "Shadow of the Solstice: A Leaphorn, Chee & Manuelito Novel",
-      "author": "Anne Hillerman",
-      "url": "https://www.goodreads.com/book/show/216793596",
-      "book_id": "216793596",
-      "rating": 2
     }
   ],
-  "last_updated": "2026-08-19T00:56:25Z"
+  "last_updated": "2026-08-20T00:55:55Z"
 }
