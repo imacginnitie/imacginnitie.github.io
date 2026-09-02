@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I will be attending the [2026 Cooperative AI Summer School](https://www.cooperativeai.com/summer-school/summer-school-2026). See you in Toronto!
+I had an amazing time in Toronto for the [2026 Cooperative AI Summer School](https://www.cooperativeai.com/summer-school/summer-school-2026)!
