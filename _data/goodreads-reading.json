@@ -1,18 +1,25 @@
 {
   "current_book": {
+    "title": "Darth Plagueis",
+    "author": "James Luceno",
+    "url": "https://www.goodreads.com/book/show/11099729",
+    "book_id": "11099729"
+  },
+  "last_read_book": {
     "title": "Dark Disciple",
     "author": "Christie Golden",
     "url": "https://www.goodreads.com/book/show/23277298",
-    "book_id": "23277298"
-  },
-  "last_read_book": {
-    "title": "Queen's Peril",
-    "author": "E.K. Johnston",
-    "url": "https://www.goodreads.com/book/show/49000155",
-    "book_id": "49000155",
-    "rating": 3
+    "book_id": "23277298",
+    "rating": 4
   },
   "previous_books": [
+    {
+      "title": "Dark Disciple",
+      "author": "Christie Golden",
+      "url": "https://www.goodreads.com/book/show/23277298",
+      "book_id": "23277298",
+      "rating": 4
+    },
     {
       "title": "Queen's Peril",
       "author": "E.K. Johnston",
@@ -33,14 +40,7 @@
       "url": "https://www.goodreads.com/book/show/44643629",
       "book_id": "44643629",
       "rating": 3
-    },
-    {
-      "title": "Brotherhood",
-      "author": "Mike Chen",
-      "url": "https://www.goodreads.com/book/show/58890947",
-      "book_id": "58890947",
-      "rating": 3
     }
   ],
-  "last_updated": "2026-09-07T02:28:23Z"
+  "last_updated": "2026-09-08T02:41:38Z"
 }
