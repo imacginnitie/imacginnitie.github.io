@@ -1,18 +1,25 @@
 {
   "current_book": {
+    "title": "Bloodline",
+    "author": "Claudia Gray",
+    "url": "https://www.goodreads.com/book/show/27209239",
+    "book_id": "27209239"
+  },
+  "last_read_book": {
     "title": "Darth Plagueis",
     "author": "James Luceno",
     "url": "https://www.goodreads.com/book/show/11099729",
-    "book_id": "11099729"
-  },
-  "last_read_book": {
-    "title": "Dark Disciple",
-    "author": "Christie Golden",
-    "url": "https://www.goodreads.com/book/show/23277298",
-    "book_id": "23277298",
-    "rating": 4
+    "book_id": "11099729",
+    "rating": 2
   },
   "previous_books": [
+    {
+      "title": "Darth Plagueis",
+      "author": "James Luceno",
+      "url": "https://www.goodreads.com/book/show/11099729",
+      "book_id": "11099729",
+      "rating": 2
+    },
     {
       "title": "Dark Disciple",
       "author": "Christie Golden",
@@ -33,14 +40,7 @@
       "url": "https://www.goodreads.com/book/show/40917496",
       "book_id": "40917496",
       "rating": 4
-    },
-    {
-      "title": "Dooku: Jedi Lost",
-      "author": "Cavan Scott",
-      "url": "https://www.goodreads.com/book/show/44643629",
-      "book_id": "44643629",
-      "rating": 3
     }
   ],
-  "last_updated": "2026-09-16T02:57:59Z"
+  "last_updated": "2026-09-17T03:01:17Z"
 }
