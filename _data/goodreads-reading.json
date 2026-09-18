@@ -1,18 +1,25 @@
 {
   "current_book": {
+    "title": "Trails of History: The story of Mount Desert Island's Paths from Norumbega to Acadia",
+    "author": "Tom St. Germain",
+    "url": "https://www.goodreads.com/book/show/5010437",
+    "book_id": "5010437"
+  },
+  "last_read_book": {
     "title": "Bloodline",
     "author": "Claudia Gray",
     "url": "https://www.goodreads.com/book/show/27209239",
-    "book_id": "27209239"
-  },
-  "last_read_book": {
-    "title": "Darth Plagueis",
-    "author": "James Luceno",
-    "url": "https://www.goodreads.com/book/show/11099729",
-    "book_id": "11099729",
-    "rating": 2
+    "book_id": "27209239",
+    "rating": 3
   },
   "previous_books": [
+    {
+      "title": "Bloodline",
+      "author": "Claudia Gray",
+      "url": "https://www.goodreads.com/book/show/27209239",
+      "book_id": "27209239",
+      "rating": 3
+    },
     {
       "title": "Darth Plagueis",
       "author": "James Luceno",
@@ -33,14 +40,7 @@
       "url": "https://www.goodreads.com/book/show/49000155",
       "book_id": "49000155",
       "rating": 3
-    },
-    {
-      "title": "Master and Apprentice",
-      "author": "Claudia Gray",
-      "url": "https://www.goodreads.com/book/show/40917496",
-      "book_id": "40917496",
-      "rating": 4
     }
   ],
-  "last_updated": "2026-09-17T03:01:17Z"
+  "last_updated": "2026-09-18T02:48:41Z"
 }
