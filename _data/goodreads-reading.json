@@ -1,18 +1,25 @@
 {
   "current_book": {
+    "title": "Trails of History: The story of Mount Desert Island's Paths from Norumbega to Acadia",
+    "author": "Tom St. Germain",
+    "url": "https://www.goodreads.com/book/show/5010437",
+    "book_id": "5010437"
+  },
+  "last_read_book": {
     "title": "Kenobi",
     "author": "John Jackson Miller",
     "url": "https://www.goodreads.com/book/show/17262173",
-    "book_id": "17262173"
-  },
-  "last_read_book": {
-    "title": "Bloodline",
-    "author": "Claudia Gray",
-    "url": "https://www.goodreads.com/book/show/27209239",
-    "book_id": "27209239",
-    "rating": 3
+    "book_id": "17262173",
+    "rating": 2
   },
   "previous_books": [
+    {
+      "title": "Kenobi",
+      "author": "John Jackson Miller",
+      "url": "https://www.goodreads.com/book/show/17262173",
+      "book_id": "17262173",
+      "rating": 2
+    },
     {
       "title": "Bloodline",
       "author": "Claudia Gray",
@@ -33,14 +40,7 @@
       "url": "https://www.goodreads.com/book/show/23277298",
       "book_id": "23277298",
       "rating": 4
-    },
-    {
-      "title": "Queen's Peril",
-      "author": "E.K. Johnston",
-      "url": "https://www.goodreads.com/book/show/49000155",
-      "book_id": "49000155",
-      "rating": 3
     }
   ],
-  "last_updated": "2026-09-30T03:37:36Z"
+  "last_updated": "2026-10-01T03:43:14Z"
 }
