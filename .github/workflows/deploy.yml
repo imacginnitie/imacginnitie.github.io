@@ -130,3 +130,6 @@ jobs:
           # scheduled deploy count as a contribution on the owner's profile.
           git-config-name: github-actions[bot]
           git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
+          # Force-push a single commit each deploy so gh-pages never accumulates
+          # history (it's generated output; roll back by reverting main instead).
+          single-commit: true
