@@ -126,3 +126,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+          # The action commits as github.actor by default, which makes every
+          # scheduled deploy count as a contribution on the owner's profile.
+          git-config-name: github-actions[bot]
+          git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
