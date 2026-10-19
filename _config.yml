@@ -696,3 +696,9 @@ profile_photos:
   - file: iceland.jpeg
     rarity: secret
     caption: "Iceland, 2023 (with Andy!)"
+  - file: acadia.jpg
+    rarity: common
+    caption: "Acadia, 2026"
+  - file: pittsburgh.jpg
+    rarity: rare
+    caption: "Pittsburgh, 2026"
