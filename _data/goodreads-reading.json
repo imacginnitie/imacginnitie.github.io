@@ -1,46 +1,6 @@
 {
-  "current_book": {
-    "title": "Path of Destruction",
-    "author": "Drew Karpyshyn",
-    "url": "https://www.goodreads.com/book/show/35430",
-    "book_id": "35430"
-  },
-  "last_read_book": {
-    "title": "Kenobi",
-    "author": "John Jackson Miller",
-    "url": "https://www.goodreads.com/book/show/17262173",
-    "book_id": "17262173",
-    "rating": 2
-  },
-  "previous_books": [
-    {
-      "title": "Kenobi",
-      "author": "John Jackson Miller",
-      "url": "https://www.goodreads.com/book/show/17262173",
-      "book_id": "17262173",
-      "rating": 2
-    },
-    {
-      "title": "Bloodline",
-      "author": "Claudia Gray",
-      "url": "https://www.goodreads.com/book/show/27209239",
-      "book_id": "27209239",
-      "rating": 3
-    },
-    {
-      "title": "Darth Plagueis",
-      "author": "James Luceno",
-      "url": "https://www.goodreads.com/book/show/11099729",
-      "book_id": "11099729",
-      "rating": 2
-    },
-    {
-      "title": "Dark Disciple",
-      "author": "Christie Golden",
-      "url": "https://www.goodreads.com/book/show/23277298",
-      "book_id": "23277298",
-      "rating": 4
-    }
-  ],
-  "last_updated": "2026-10-27T03:23:13Z"
+  "current_book": null,
+  "last_read_book": null,
+  "previous_books": [],
+  "last_updated": "2026-10-28T03:39:56Z"
 }
