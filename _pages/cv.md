@@ -5,7 +5,7 @@ title: cv
 nav: true
 nav_order: 4
 cv_pdf: Isabel_MacGinnitie_CV.pdf # you can also use external links here
-description: Last updated 10/31/2026
+description:
 ---
 
 <div style="width: 100%; height: 800px;">
