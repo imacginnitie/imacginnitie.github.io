@@ -129,14 +129,24 @@ layout: default
       asking from Andy's site: https://github.com/andyjliu/andyjliu.github.io lol
     -->
 
+    {% comment %}
+      Reading and listening are independent: the sentence renders with
+      whichever half has data ("reading X and listening to Y", "reading X",
+      or "listening to Y"), and is skipped only when both are missing.
+    {% endcomment %}
     {% assign reading_data = site.data.goodreads_reading %}
     {% assign lastfm_data = site.data.lastfm %}
+    {% assign reading_book = null %}
+    {% if reading_data.current_book and reading_data.current_book.title %}
+      {% assign reading_book = reading_data.current_book %}
+    {% elsif reading_data.last_read_book and reading_data.last_read_book.title %}
+      {% assign reading_book = reading_data.last_read_book %}
+    {% endif %}
     {% assign has_lastfm = false %}
     {% if lastfm_data and lastfm_data.artist %}
       {% assign has_lastfm = true %}
     {% endif %}
-    {% if reading_data and (reading_data.current_book or reading_data.last_read_book) %}
-      {% assign reading_lead = ' I am currently reading ' %}
+    {% if reading_book or has_lastfm %}
       <script>
         (function () {
           function escapeHtml(s) {
@@ -240,11 +250,8 @@ layout: default
             if (paragraphs.length === 0) return;
             const lastParagraph = paragraphs[paragraphs.length - 1];
 
-            const bookTitle = {% if reading_data.current_book %}{{ reading_data.current_book.title | jsonify }}{% else %}{{ reading_data.last_read_book.title | jsonify }}{% endif %};
-            const bookAuthor = {% if reading_data.current_book %}{% if reading_data.current_book.author %}{{ reading_data.current_book.author | jsonify }}{% else %}null{% endif %}{% else %}{% if reading_data.last_read_book.author %}{{ reading_data.last_read_book.author | jsonify }}{% else %}null{% endif %}{% endif %};
-
+            const book = {{ reading_book | jsonify }};
             const previousBooksRaw = {{ reading_data.previous_books | jsonify }} || [];
-            const hasLastfm = {{ has_lastfm | jsonify }};
             {% if has_lastfm %}
             const topArtists = {{ lastfm_data.top_artists | jsonify }} || [];
             const artistName = topArtists[0] || {{ lastfm_data.artist | jsonify }};
@@ -253,32 +260,33 @@ layout: default
             const artistName = null;
             {% endif %}
 
-            const readingLead = {{ reading_lead | jsonify }};
-
-            const previousBooks = dedupeBooksByTitle(previousBooksRaw)
-              .filter(function (b) {
-                return b && b.title && b.title !== bookTitle;
-              })
-              .slice(0, 2);
-            const bookTip = booksTooltipHtml(previousBooks);
-            const $bookPhrase = $('<span>');
-            if (bookTip) {
-              $bookPhrase.attr('tabindex', '0');
-              $bookPhrase.addClass('reading-hover');
-              $bookPhrase.tooltip({
-                html: true,
-                title: bookTip,
-                template: readingTooltipTemplate,
-                container: 'body',
-              });
-            }
-            $bookPhrase.append(document.createTextNode(bookTitle));
-            if (bookAuthor) {
-              $bookPhrase.append(document.createTextNode(' by ' + bookAuthor));
+            let $bookPhrase = null;
+            if (book && book.title) {
+              const previousBooks = dedupeBooksByTitle(previousBooksRaw)
+                .filter(function (b) {
+                  return b && b.title && b.title !== book.title;
+                })
+                .slice(0, 2);
+              const bookTip = booksTooltipHtml(previousBooks);
+              $bookPhrase = $('<span>');
+              if (bookTip) {
+                $bookPhrase.attr('tabindex', '0');
+                $bookPhrase.addClass('reading-hover');
+                $bookPhrase.tooltip({
+                  html: true,
+                  title: bookTip,
+                  template: readingTooltipTemplate,
+                  container: 'body',
+                });
+              }
+              $bookPhrase.append(document.createTextNode(book.title));
+              if (book.author) {
+                $bookPhrase.append(document.createTextNode(' by ' + book.author));
+              }
             }
 
             let $artist = null;
-            if (hasLastfm && artistName) {
+            if (artistName) {
               const artistLines = dedupePreservingOrder(topArtists).filter(function (a) {
                 return a && a !== artistName;
               });
@@ -295,13 +303,21 @@ layout: default
               }
             }
 
-            $(lastParagraph).append(document.createTextNode(readingLead));
-            $(lastParagraph).append($bookPhrase);
-            if ($artist) {
-              $(lastParagraph).append(document.createTextNode(' and listening to '));
-              $(lastParagraph).append($artist);
+            if (!$bookPhrase && !$artist) return;
+
+            const $p = $(lastParagraph);
+            if ($bookPhrase) {
+              $p.append(document.createTextNode(' I am currently reading '));
+              $p.append($bookPhrase);
+              if ($artist) {
+                $p.append(document.createTextNode(' and listening to '));
+                $p.append($artist);
+              }
+            } else {
+              $p.append(document.createTextNode(' I am currently listening to '));
+              $p.append($artist);
             }
-            $(lastParagraph).append(document.createTextNode('.'));
+            $p.append(document.createTextNode('.'));
           });
         })();
       </script>

@@ -40,6 +40,10 @@ jobs:
           ruby .github/scripts/update-goodreads-reading.rb
 
       - name: Check for changes and commit
+        # Run even if the fetch step failed: when only one of the two Goodreads
+        # sources breaks, the script still updates the other half of the data
+        # before exiting non-zero, and that partial update should be committed.
+        if: ${{ !cancelled() }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
